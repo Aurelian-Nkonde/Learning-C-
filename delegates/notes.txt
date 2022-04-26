@@ -1,0 +1,78 @@
+What is a Delegate ?
+    A delegate is an object that knows how to call a method
+A Delegate Type ?
+    defines the kind of a method that delegate instance can call
+    It defines the method's return type and parameter types
+
+A delegate type example called ThisDelegate
+
+    delegate void ThisDelegate(int numbs);
+
+    ThisDelegate is compatible with any method with a void return type and a single parameter of type int
+    such as the following
+
+    static void Method1(int a)
+    {
+        console.writeLine("the first method");
+    }
+
+    static void Method2(int b){ console.writeLine("the second method"); }
+
+    static void Method3(int c) => console.writeLine("last method");
+
+assigning a method to a delegate creates a delegate instance
+    ThisDelegate one = Method1;
+
+you can invoke a delegate same way as a method
+    one();
+
+A delegate instance literally acts as a delegate for the caller
+the caller invokes the delegate, and then the delegate calls the target method
+
+Writing Plug-in Methods with Delegates
+    a delegate variable is assigned a method at runtime
+    useful for writting plug in Methods
+
+ higher-order function ?
+    a function that takes other function as a argument
+
+
+Instance and Static Method Targets
+    A delegate’s target method can be a local, static, or instance method
+    When an instance method is assigned to a delegate object, the latter maintains a ref‐
+    erence not only to the method but also to the instance to which the method belongs.
+
+
+Multicast Delegates
+    All delegate instances have multicast capability
+    This means that a delegate instance can reference not just a single
+    target method but also a list of target methods
+    The + and += operators combine delegate instances
+
+    theDelagate a = Method1;
+    a += Method2;
+
+    Invoking a will now call both methods Method1 & Method2
+    Delegates are invoked in the order in which they are added.
+
+    The - and -= operators remove the right delegate operand from the left delegate operand
+
+    a -= Method2;
+
+    invoking delegate a will now cause only Method1 to be called;
+    If a multicast delegate has a nonvoid return type, the caller receives the return value
+    from the last method to be invoked
+
+
+Generic Delegate Types
+    A delegate type can contain generic type parameters:
+
+    public delegate T Transform<T>(T parameter);
+
+
+The Func and Action Delegates
+    With generic delegates, it becomes possible to write a small set of delegate types that
+    are so general they can work for methods of any return type and any (reasonable)
+    number of arguments.
+    These delegates are the Func and Action delegates,
+    e (the in and out annotations indicate variance
